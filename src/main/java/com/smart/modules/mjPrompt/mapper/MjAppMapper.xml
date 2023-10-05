@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.smart.modules.mjPrompt.mapper.MjAppMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="mj_appResultMap" type="com.smart.modules.mjPrompt.entity.MjAppEntity">
+        <result column="id" property="id"/>
+        <result column="remark" property="remark"/>
+        <result column="create_user" property="createUser"/>
+        <result column="create_dept" property="createDept"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_user" property="updateUser"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="status" property="status"/>
+        <result column="is_deleted" property="isDeleted"/>
+        <result column="app_name" property="appName"/>
+        <result column="app_code" property="appCode"/>
+        <result column="link_ai_code" property="linkAiCode"/>
+        <result column="link_ai_token" property="linkAiToken"/>
+    </resultMap>
+
+</mapper>

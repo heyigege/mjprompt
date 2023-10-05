@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.smart.modules.mjPrompt.mapper.MjPhraseExpandMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="mj_phrase_expandResultMap" type="com.smart.modules.mjPrompt.entity.MjPhraseExpandEntity">
+        <result column="id" property="id"/>
+        <result column="remark" property="remark"/>
+        <result column="create_user" property="createUser"/>
+        <result column="create_dept" property="createDept"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_user" property="updateUser"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="status" property="status"/>
+        <result column="is_deleted" property="isDeleted"/>
+        <result column="phrase_id" property="phraseId"/>
+        <result column="main_id" property="mainId"/>
+        <result column="dictbiz_id" property="dictbizId"/>
+        <result column="min_num" property="minNum"/>
+        <result column="max_num" property="maxNum"/>
+    </resultMap>
+    <select id="getAppCode" resultType="java.lang.String">
+        SELECT app.app_code
+        FROM smart_mj_phrase p
+                 JOIN smart_mj_app app on app.id = p.app_id
+        where p.id = #{phraseId}
+
+    </select>
+
+</mapper>
