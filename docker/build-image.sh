@@ -24,11 +24,12 @@ echo ${JAR_FILE_NAME}
 
 cp ${JAR_FILE_NAME} ./app.jar
 
-#java -Djarmode=layertools -jar app.jar extract
-
 docker build . -t mjprompt:${VERSION}
 
-rm -rf application dependencies snapshot-dependencies spring-boot-loader app.jar
+rm -rf  app.jar
+
+docker tag mjprompt:${VERSION} registry.cn-beijing.aliyuncs.com/heyi_docker/mjprompt:${VERSION}
+docker push  registry.cn-beijing.aliyuncs.com/heyi_docker/mjprompt:${VERSION}
 
 docker tag mjprompt:${VERSION} heyigege/mjprompt-${ARCH}:${VERSION}
 docker push heyigege/mjprompt-${ARCH}:${VERSION}

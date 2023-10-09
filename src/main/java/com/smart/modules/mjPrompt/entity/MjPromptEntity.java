@@ -6,21 +6,20 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-
 import java.util.Date;
 import java.time.LocalDateTime;
 
 
 /**
- * 实体类
+ *  实体类
  *
  * @author SmartX
  */
 @Data
-@TableName("smart_mj_phrase")
+@TableName("smart_mj_prompt")
 @EqualsAndHashCode(callSuper = true)
-@ApiModel(value = "MjPhrase对象", description = "")
-public class MjPhraseEntity extends BaseEntity {
+@ApiModel(value = "MjPrompt对象", description = "")
+public class MjPromptEntity extends BaseEntity {
 
 	private static final long serialVersionUID = 1L;
 
@@ -30,23 +29,29 @@ public class MjPhraseEntity extends BaseEntity {
 	@ApiModelProperty(value = "备注")
 	private String remark;
 	/**
-	 * 名称
+	 * prompt
 	 */
-	@ApiModelProperty(value = "名称")
-	private String phraseName;
+	@ApiModelProperty(value = "prompt")
+	private String prompt;
 	/**
-	 * 词组尾缀
+	 * Prompt拼接
 	 */
-	@ApiModelProperty(value = "词组尾缀")
+	@ApiModelProperty(value = "Prompt拼接")
 	private String phraseSuffix;
 	/**
-	 * mj_app_id
+	 * appId
 	 */
-	@ApiModelProperty(value = "mj_app_id")
+	@ApiModelProperty(value = "appId")
 	private Long appId;
-
-
-	private Integer isPicture;
-	private String pictureUrl;
+	/**
+	 * 词组Id
+	 */
+	@ApiModelProperty(value = "词组Id")
+	private Long phraseId;
+	/**
+	 * 拼接的Prompt
+	 */
+	@ApiModelProperty(value = "拼接的Prompt")
+	private String promptOrigin;
 
 }

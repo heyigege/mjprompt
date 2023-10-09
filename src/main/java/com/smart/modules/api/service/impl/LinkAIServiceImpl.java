@@ -7,10 +7,13 @@ import com.smart.core.http.HttpRequest;
 import com.smart.modules.api.model.dto.link_aI.*;
 import com.smart.modules.api.service.LinkAIService;
 
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 
 import lombok.extern.slf4j.Slf4j;
+import okhttp3.Response;
+import okhttp3.ResponseBody;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -33,7 +36,18 @@ public class LinkAIServiceImpl implements LinkAIService {
 		CompletionsResult completionsResult = HttpRequest.post("https://api.link-ai.chat/v1/chat/completions")
 			.addHeader("Authorization", "Bearer " + completionBody.getToken())
 			.bodyString(gson.toJson(completions))//表单内容
-			.execute().onSuccess(response -> response.asValue(CompletionsResult.class));
+			.readTimeout(Duration.ofSeconds(100000))
+			.connectTimeout(Duration.ofSeconds(100000))
+			.execute().onFailed((err, e) -> {
+				log.info("err:{}", err.toString());
+				log.info("e:{}", e.getMessage());
+			}).onSuccess(response -> {
+				Response rawResponse = response.rawResponse();
+				ResponseBody body = rawResponse.body();
+				log.info(body.toString());
+				return response.asValue(CompletionsResult.class);
+			});
+		log.info("completionsResult:{}", completionsResult.toString());
 		List<Choice> choices = completionsResult.getChoices();
 		choices.stream().forEach((item) -> {
 			resString.append(item.getMessage().getContent());

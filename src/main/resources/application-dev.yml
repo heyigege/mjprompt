@@ -8,9 +8,9 @@ spring:
     ssl: false
   datasource:
     # MySql
-    url: jdbc:mysql://127.0.0.1:3306/mjprompt?useSSL=false&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&transformedBitIsBoolean=true&serverTimezone=GMT%2B8&nullCatalogMeansCurrent=true&allowPublicKeyRetrieval=true
-    username: root
-    password: 123456
+    url: jdbc:mysql://39.105.156.133:3306/mjprompt_chatpro?useSSL=false&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&transformedBitIsBoolean=true&serverTimezone=GMT%2B8&nullCatalogMeansCurrent=true&allowPublicKeyRetrieval=true
+    username: mjprompt_chatpro
+    password: DGhMFw7cGB7YjK7f
 #第三方登陆
 social:
   enabled: true

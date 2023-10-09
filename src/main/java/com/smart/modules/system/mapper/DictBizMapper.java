@@ -19,6 +19,7 @@ package com.smart.modules.system.mapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.smart.modules.system.entity.DictBiz;
 import com.smart.modules.system.vo.DictBizVO;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -60,4 +61,5 @@ public interface DictBizMapper extends BaseMapper<DictBiz> {
 	 */
 	List<DictBizVO> parentTree();
 
+	List<String> getDictValues(@Param("parentId") Long parentId);
 }

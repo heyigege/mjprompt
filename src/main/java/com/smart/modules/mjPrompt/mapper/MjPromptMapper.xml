@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.smart.modules.mjPrompt.mapper.MjPhraseMapper">
+<mapper namespace="com.smart.modules.mjPrompt.mapper.MjPromptMapper">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="mj_phraseResultMap" type="com.smart.modules.mjPrompt.entity.MjPhraseEntity">
+    <resultMap id="mj_promptResultMap" type="com.smart.modules.mjPrompt.entity.MjPromptEntity">
         <result column="id" property="id"/>
         <result column="remark" property="remark"/>
         <result column="create_user" property="createUser"/>
@@ -13,20 +13,11 @@
         <result column="update_time" property="updateTime"/>
         <result column="status" property="status"/>
         <result column="is_deleted" property="isDeleted"/>
-        <result column="phrase_name" property="phraseName"/>
+        <result column="prompt" property="prompt"/>
         <result column="phrase_suffix" property="phraseSuffix"/>
         <result column="app_id" property="appId"/>
-        <result column="is_picture" property="isPicture"/>
-        <result column="picture_url" property="pictureUrl"/>
+        <result column="phrase_id" property="phraseId"/>
+        <result column="prompt_origin" property="promptOrigin"/>
     </resultMap>
-    <select id="getPhraseSuffixByAppCode" resultType="java.lang.String">
-        SELECT phrase_suffix
-        FROM smart_mj_app as app
-                 LEFT JOIN smart_mj_phrase phrase on app.id = phrase.app_id
-        WHERE app.is_deleted = 0
-          AND phrase.is_deleted = 0
-          AND app.STATUS = 1
-          AND (app.app_code = #{appCode} AND app.STATUS = 1 AND phrase.STATUS = 1)
-    </select>
 
 </mapper>

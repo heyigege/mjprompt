@@ -1,6 +1,8 @@
 #服务器配置
 server:
   port: 8100
+  servlet:
+    context-path: /api
   undertow:
     threads:
       # 设置IO线程数, 它主要执行非阻塞的任务,它们会负责多个连接, 默认设置每个CPU核心一个线程
@@ -196,6 +198,7 @@ smart:
       - /smart-test/**
       - /api/mj/getMjPrompt
       - /api/link_aI/getCompletions
+      - /api/dictDiz/generate
     #授权认证配置
     auth:
       - method: ALL
