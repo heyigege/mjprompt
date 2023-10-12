@@ -1,32 +1,24 @@
 package com.smart.modules.mjPrompt.controller;
 
-import com.google.gson.Gson;
-import com.smart.core.tool.utils.BeanUtil;
-import com.smart.modules.mjPrompt.dto.MjAppConfigDTO;
-import io.swagger.annotations.Api;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.github.xiaoymin.knife4j.annotations.ApiOperationSupport;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
-import lombok.AllArgsConstructor;
-
-import javax.validation.Valid;
-
+import com.google.gson.Gson;
 import com.smart.core.boot.ctrl.SmartController;
-import com.smart.common.constant.CommonConstant;
-
 import com.smart.core.mp.support.Condition;
 import com.smart.core.mp.support.Query;
 import com.smart.core.tool.api.R;
+import com.smart.core.tool.utils.BeanUtil;
 import com.smart.core.tool.utils.Func;
-import org.springframework.boot.json.GsonJsonParser;
-import org.springframework.web.bind.annotation.*;
-import com.baomidou.mybatisplus.core.metadata.IPage;
-
+import com.smart.modules.mjPrompt.dto.MjAppConfigDTO;
 import com.smart.modules.mjPrompt.entity.MjAppConfigEntity;
-import com.smart.modules.mjPrompt.vo.MjAppConfigVO;
-import com.smart.modules.mjPrompt.wrapper.MjAppConfigWrapper;
 import com.smart.modules.mjPrompt.service.IMjAppConfigService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import lombok.AllArgsConstructor;
+import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.HashMap;
 
 
@@ -54,7 +46,6 @@ public class MjAppConfigController extends SmartController {
 		MjAppConfigDTO mjAppConfigDTO = new MjAppConfigDTO();
 		BeanUtil.copyProperties(detail, mjAppConfigDTO);
 		if (detail.getEmailConfig() != null) {
-
 			Gson gson = new Gson();
 			HashMap<String, String> emailConfigMap = gson.fromJson(detail.getEmailConfig(), HashMap.class);
 			mjAppConfigDTO.setMailSender(emailConfigMap.get("mailSender"));
