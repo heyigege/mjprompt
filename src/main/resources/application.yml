@@ -196,6 +196,8 @@ smart:
     #接口放行
     skip-url:
       - /smart-test/**
+      - /api/mj/**
+      - /api/mj/getMjAppConfig
       - /api/mj/getMjPrompt
       - /api/link_aI/getCompletions
       - /api/dictDiz/generate

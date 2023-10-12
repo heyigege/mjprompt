@@ -1,12 +1,16 @@
 package com.smart.modules.mjPrompt.controller;
 
 import com.smart.common.vo.KeyValueVo;
+import com.smart.modules.mjPrompt.entity.MjAppConfigEntity;
+import com.smart.modules.mjPrompt.service.IMjAppConfigService;
 import io.swagger.annotations.Api;
 import com.github.xiaoymin.knife4j.annotations.ApiOperationSupport;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import lombok.AllArgsConstructor;
+
 import javax.validation.Valid;
+
 import com.smart.core.boot.ctrl.SmartController;
 import com.smart.common.constant.CommonConstant;
 
@@ -14,6 +18,7 @@ import com.smart.core.mp.support.Condition;
 import com.smart.core.mp.support.Query;
 import com.smart.core.tool.api.R;
 import com.smart.core.tool.utils.Func;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 
@@ -29,7 +34,7 @@ import static com.smart.common.utils.CommonUtil.getRandomString;
 
 
 /**
- *  控制器
+ * 控制器
  *
  * @author SmartX
  */
@@ -40,6 +45,8 @@ import static com.smart.common.utils.CommonUtil.getRandomString;
 public class MjAppController extends SmartController {
 
 	private final IMjAppService mj_appService;
+	@Autowired
+	private IMjAppConfigService mjAppConfigService;
 
 	/**
 	 * 详情
@@ -71,7 +78,11 @@ public class MjAppController extends SmartController {
 	@ApiOperation(value = "新增", notes = "传入mj_app")
 	public R save(@Valid @RequestBody MjAppEntity mj_app) {
 		mj_app.setAppCode(getRandomString(6));
-		return R.status(mj_appService.save(mj_app));
+		boolean save = mj_appService.save(mj_app);
+		MjAppConfigEntity mjAppConfigEntity = new MjAppConfigEntity();
+		mjAppConfigEntity.setAppId(mj_app.getId());
+		mjAppConfigService.save(mjAppConfigEntity);
+		return R.status(save);
 	}
 
 	/**
@@ -104,6 +115,7 @@ public class MjAppController extends SmartController {
 	public R remove(@ApiParam(value = "主键集合", required = true) @RequestParam String ids) {
 		return R.status(mj_appService.deleteLogic(Func.toLongList(ids)));
 	}
+
 	@GetMapping("/getSelect")
 	@ApiOperationSupport(order = 1)
 	@ApiOperation(value = "下拉选项", notes = "获取下拉选项")

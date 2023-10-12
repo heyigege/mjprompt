@@ -4,7 +4,7 @@ import com.github.xiaoymin.knife4j.annotations.ApiOperationSupport;
 import com.smart.core.boot.ctrl.SmartController;
 import com.smart.core.tool.api.R;
 import com.smart.modules.api.dto.DictDizeGenerateRequestDTO;
-import com.smart.modules.api.dto.mjPromptRequestDTO;
+import com.smart.modules.api.dto.MjPromptRequestDTO;
 import com.smart.modules.api.model.dto.link_aI.CompletionBody;
 import com.smart.modules.api.service.DictDizService;
 import com.smart.modules.api.service.LinkAIService;
