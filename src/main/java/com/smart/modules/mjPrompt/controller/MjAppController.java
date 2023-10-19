@@ -1,32 +1,25 @@
 package com.smart.modules.mjPrompt.controller;
 
-import com.smart.common.vo.KeyValueVo;
-import com.smart.modules.mjPrompt.entity.MjAppConfigEntity;
-import com.smart.modules.mjPrompt.service.IMjAppConfigService;
-import io.swagger.annotations.Api;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.github.xiaoymin.knife4j.annotations.ApiOperationSupport;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
-import lombok.AllArgsConstructor;
-
-import javax.validation.Valid;
-
+import com.smart.common.vo.KeyValueVo;
 import com.smart.core.boot.ctrl.SmartController;
-import com.smart.common.constant.CommonConstant;
-
 import com.smart.core.mp.support.Condition;
 import com.smart.core.mp.support.Query;
 import com.smart.core.tool.api.R;
 import com.smart.core.tool.utils.Func;
+import com.smart.modules.mjPrompt.entity.MjAppConfigEntity;
+import com.smart.modules.mjPrompt.entity.MjAppEntity;
+import com.smart.modules.mjPrompt.service.IMjAppConfigService;
+import com.smart.modules.mjPrompt.service.IMjAppService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import com.baomidou.mybatisplus.core.metadata.IPage;
 
-import com.smart.modules.mjPrompt.entity.MjAppEntity;
-import com.smart.modules.mjPrompt.vo.MjAppVO;
-import com.smart.modules.mjPrompt.wrapper.MjAppWrapper;
-import com.smart.modules.mjPrompt.service.IMjAppService;
-
+import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -123,4 +116,20 @@ public class MjAppController extends SmartController {
 		List<KeyValueVo> list = mj_appService.list(Condition.getQueryWrapper(new MjAppEntity())).stream().map(mj_app -> KeyValueVo.builder().value(mj_app.getId()).key(mj_app.getAppName()).build()).collect(Collectors.toList());
 		return R.data(list);
 	}
+
+	@PostMapping("/enable")
+	@ApiOperationSupport(order = 8)
+	@ApiOperation(value = "启用停用")
+	public R<Boolean> setEnable(@RequestBody MjAppEntity mjApp) {
+
+		int status = 1;
+		if (mjApp.getStatus() == 1) {
+			status = 2;
+		}
+
+		boolean update = mj_appService.lambdaUpdate().eq(MjAppEntity::getId, mjApp.getId()).set(MjAppEntity::getStatus, status).update();
+		return R.status(update);
+	}
+
+
 }

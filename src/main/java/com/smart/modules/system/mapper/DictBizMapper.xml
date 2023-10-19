@@ -66,5 +66,14 @@
         where is_deleted = 0
           and parent_id = #{parentId}
     </select>
+    <select id="getDictValuesString" resultType="java.lang.String">
+
+        select GROUP_CONCAT(dict_value SEPARATOR ', ')
+        from smart_dict_biz
+        where is_deleted = 0
+          and id in (${dictId})
+
+    </select>
+
 
 </mapper>

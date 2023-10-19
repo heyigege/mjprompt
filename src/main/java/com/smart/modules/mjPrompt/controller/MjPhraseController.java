@@ -1,29 +1,25 @@
 package com.smart.modules.mjPrompt.controller;
 
-import io.swagger.annotations.Api;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.github.xiaoymin.knife4j.annotations.ApiOperationSupport;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
-import lombok.AllArgsConstructor;
-import javax.validation.Valid;
 import com.smart.core.boot.ctrl.SmartController;
-import com.smart.common.constant.CommonConstant;
-
 import com.smart.core.mp.support.Condition;
 import com.smart.core.mp.support.Query;
 import com.smart.core.tool.api.R;
 import com.smart.core.tool.utils.Func;
-import org.springframework.web.bind.annotation.*;
-import com.baomidou.mybatisplus.core.metadata.IPage;
-
 import com.smart.modules.mjPrompt.entity.MjPhraseEntity;
-import com.smart.modules.mjPrompt.vo.MjPhraseVO;
-import com.smart.modules.mjPrompt.wrapper.MjPhraseWrapper;
 import com.smart.modules.mjPrompt.service.IMjPhraseService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import lombok.AllArgsConstructor;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 
 /**
- *  控制器
+ * 控制器
  *
  * @author SmartX
  */
@@ -96,6 +92,20 @@ public class MjPhraseController extends SmartController {
 	@ApiOperation(value = "逻辑删除", notes = "传入ids")
 	public R remove(@ApiParam(value = "主键集合", required = true) @RequestParam String ids) {
 		return R.status(mj_phraseService.deleteLogic(Func.toLongList(ids)));
+	}
+
+	@PostMapping("/enable")
+	@ApiOperationSupport(order = 8)
+	@ApiOperation(value = "启用停用")
+	public R<Boolean> setEnable(@RequestBody MjPhraseEntity mjPhrase) {
+
+		int status = 1;
+		if (mjPhrase.getStatus() == 1) {
+			status = 2;
+		}
+
+		boolean update = mj_phraseService.lambdaUpdate().eq(MjPhraseEntity::getId, mjPhrase.getId()).set(MjPhraseEntity::getStatus, status).update();
+		return R.status(update);
 	}
 
 }

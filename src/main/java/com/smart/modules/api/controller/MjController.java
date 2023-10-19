@@ -5,6 +5,7 @@ import com.github.xiaoymin.knife4j.annotations.ApiOperationSupport;
 import com.google.gson.Gson;
 import com.smart.core.boot.ctrl.SmartController;
 import com.smart.core.cache.utils.CacheUtil;
+import com.smart.core.tool.api.R;
 import com.smart.modules.api.dto.MjPromptRequestDTO;
 import com.smart.modules.api.dto.MjPromptResponseDTO;
 import com.smart.modules.api.model.dto.link_aI.CompletionBody;
@@ -23,8 +24,10 @@ import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-import com.smart.core.tool.api.R;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 import java.util.*;
@@ -149,6 +152,7 @@ public class MjController extends SmartController {
 			mjAppConfigDTO.setSmtpPassword(emailConfigMap.get("smtpPassword"));
 		}
 		return R.data(mjAppConfigDTO);
-
 	}
+
+
 }

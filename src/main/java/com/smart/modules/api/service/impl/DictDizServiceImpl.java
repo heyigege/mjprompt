@@ -64,12 +64,12 @@ public class DictDizServiceImpl implements DictDizService {
 		Boolean isBoolean = true;
 		while (isBoolean) {
 			CompletionBody completionBody = new CompletionBody();
-			completionBody.setAppCode("UjxlqsbN");
+			completionBody.setAppCode("r1TSqTD5");
 			completionBody.setToken("Link_tYYkOAp6Mam364bJlHgRWAVEMcZiAYE8mmWc5l0vIQ");
 			completionBody.setPrompt(prompt);
 			String completions = linkAIService.getCompletions(completionBody);
 
-			String[] words = completions.split(",");
+			String[] words = completions.split("\\|");
 			wordCollect.addAll(Arrays.stream(words).distinct().collect(Collectors.toList()));
 
 			if (wordCollect.size() >= num) {

@@ -19,7 +19,7 @@
     </resultMap>
     <select id="getAppConfig" resultType="com.smart.modules.mjPrompt.dto.MjAppConfigDTO">
 
-        SELECT appConfig.*
+        SELECT appConfig.*, app.app_name
         FROM smart_mj_app_config as appConfig
                  LEFT JOIN smart_mj_app app on app.id = appConfig.app_id
         where app.app_code = #{appCode}

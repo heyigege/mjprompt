@@ -1,11 +1,11 @@
 package com.smart.modules.mjPrompt.dto;
 
+import com.smart.modules.mjPrompt.entity.MjPhraseExpandEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import com.smart.modules.mjPrompt.entity.MjPhraseExpandEntity;
 
 /**
- *  模型DTO
+ * 模型DTO
  *
  * @author SmartX
  */
@@ -14,5 +14,7 @@ import com.smart.modules.mjPrompt.entity.MjPhraseExpandEntity;
 public class MjPhraseExpandDTO extends MjPhraseExpandEntity {
 
 	private static final long serialVersionUID = 1L;
+
+	private String dictbizString;
 
 }

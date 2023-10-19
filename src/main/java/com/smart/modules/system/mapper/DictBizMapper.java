@@ -62,4 +62,6 @@ public interface DictBizMapper extends BaseMapper<DictBiz> {
 	List<DictBizVO> parentTree();
 
 	List<String> getDictValues(@Param("parentId") Long parentId);
+
+	String getDictValuesString(@Param("dictId") String dictId);
 }

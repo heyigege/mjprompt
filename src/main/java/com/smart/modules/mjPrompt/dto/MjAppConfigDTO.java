@@ -1,9 +1,9 @@
 package com.smart.modules.mjPrompt.dto;
 
+import com.smart.modules.mjPrompt.entity.MjAppConfigEntity;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import com.smart.modules.mjPrompt.entity.MjAppConfigEntity;
 
 /**
  * 模型DTO
@@ -40,4 +40,9 @@ public class MjAppConfigDTO extends MjAppConfigEntity {
 
 	@ApiModelProperty(value = "SMTP密码")
 	private String smtpPassword;
+	/**
+	 * 应用名称
+	 */
+	@ApiModelProperty(value = "应用名称")
+	private String appName;
 }
